@@ -34,51 +34,100 @@ You should see:
 
 ### 3. Install the Application
 
-From the project directory:
+**Option A: Using Conda (Recommended)**
 
 ```bash
-pip3 install -e .
+cd ~/Engineering/tuxedo-rgb
+conda env create -f environment.yml
+conda activate tuxedo-rgb
+```
+
+**Option B: Using Virtual Environment**
+
+```bash
+cd ~/Engineering/tuxedo-rgb
+python3 -m venv venv
+source venv/bin/activate
+pip install -e .
+```
+
+**Option C: Using pipx**
+
+```bash
+cd ~/Engineering/tuxedo-rgb
+pipx install -e .
 ```
 
 ### 4. Test with CLI (Quick Test)
 
 The CLI is great for quick testing without needing the GUI:
 
-```bash
-# List available color schemes
-python3 -m tuxedo_rgb.cli list-schemes
+**If using Conda:**
 
-# Set keyboard to red
-sudo python3 -m tuxedo_rgb.cli solid 255,0,0
+```bash
+# Make sure conda environment is activated
+conda activate tuxedo-rgb
+
+# List available color schemes (no sudo needed)
+python -m tuxedo_rgb.cli list-schemes
+
+# Set keyboard to red (needs sudo)
+sudo $(which python) -m tuxedo_rgb.cli solid 255,0,0
 
 # Set keyboard to blue
-sudo python3 -m tuxedo_rgb.cli solid 0,0,255
+sudo $(which python) -m tuxedo_rgb.cli solid 0,0,255
 
 # Try breathing effect (press Ctrl+C to stop)
-sudo python3 -m tuxedo_rgb.cli breathing 0,255,0 --duration 3
+sudo $(which python) -m tuxedo_rgb.cli breathing 0,255,0 --duration 3
 
 # Try rainbow wave (press Ctrl+C to stop)
-sudo python3 -m tuxedo_rgb.cli rainbow-wave --duration 5
+sudo $(which python) -m tuxedo_rgb.cli rainbow-wave --duration 5
 
 # Try color cycle with cyberpunk scheme (press Ctrl+C to stop)
-sudo python3 -m tuxedo_rgb.cli color-cycle --scheme cyberpunk --duration 5
+sudo $(which python) -m tuxedo_rgb.cli color-cycle --scheme cyberpunk --duration 5
 
 # Reset to white
-sudo python3 -m tuxedo_rgb.cli reset
+sudo $(which python) -m tuxedo_rgb.cli reset
+```
+
+**If using venv:**
+
+```bash
+# Make sure venv is activated
+source venv/bin/activate
+
+# List available color schemes (no sudo needed)
+python -m tuxedo_rgb.cli list-schemes
+
+# Set keyboard to red (needs sudo with full path)
+sudo venv/bin/python -m tuxedo_rgb.cli solid 255,0,0
+
+# Other commands follow the same pattern
+sudo venv/bin/python -m tuxedo_rgb.cli rainbow-wave --duration 5
 ```
 
 ### 5. Test the GUI
 
 Launch the GUI application:
 
+**If using Conda:**
+
 ```bash
-sudo tuxedo-rgb
+conda activate tuxedo-rgb
+sudo $(which python) -m tuxedo_rgb.gui
 ```
 
-Or run directly:
+**If using venv:**
 
 ```bash
-sudo python3 -m tuxedo_rgb.gui
+source venv/bin/activate
+sudo venv/bin/python -m tuxedo_rgb.gui
+```
+
+**If installed via pipx:**
+
+```bash
+sudo $(which tuxedo-rgb)
 ```
 
 #### GUI Testing Checklist
