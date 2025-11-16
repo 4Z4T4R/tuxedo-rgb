@@ -1,0 +1,11 @@
+name: tuxedo-rgb
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.8
+  - pygobject>=3.42.0
+  - gtk4
+  - pip
+  - pip:
+    - -e .
